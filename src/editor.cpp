@@ -9,8 +9,6 @@
 #include "zep/syntax_providers.h"
 #include "zep/tab_window.h"
 
-#include "config_app.h"
-
 #include <unordered_set>
 
 namespace Zep
@@ -710,11 +708,11 @@ ZepExCommand* ZepEditor::FindExCommand(const StringId& Id)
         return nullptr;
     }
 
-    for (auto& [name, pEx] : m_mapExCommands)
+    for (auto& command : m_mapExCommands)
     {
-        if (pEx->ExCommandId() == Id)
+        if (command.second->ExCommandId() == Id)
         {
-            return pEx.get();
+            return command.second.get();
         }
     }
     return nullptr;
@@ -1276,9 +1274,9 @@ void ZepEditor::SetFlags(uint32_t flags)
 std::vector<const KeyMap*> ZepEditor::GetGlobalKeyMaps(ZepMode& mode)
 {
     std::vector<const KeyMap*> maps;
-    for (auto& [id, spMap] : m_mapExCommands)
+    for (auto& command : m_mapExCommands)
     {
-        auto pMap = spMap->GetKeyMappings(mode);
+        auto pMap = command.second->GetKeyMappings(mode);
         if (pMap)
         {
             maps.push_back(pMap);

@@ -12,7 +12,7 @@
 namespace Zep
 {
 
-const inline float ZPI = 3.14159862f;
+const float ZPI = 3.14159862f;
 template <class T>
 struct NVec2
 {

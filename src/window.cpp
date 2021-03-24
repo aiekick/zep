@@ -350,9 +350,9 @@ NVec2f ZepWindow::ArrangeLineMarkers(tRangeMarkers& markers)
     uint32_t lineWidgetCount = 0;
     bool underPad = false;
     std::vector<ByteIndex> markerStack;
-    for (auto& [index, markerSet] : markers)
+    for (auto& marker : markers)
     {
-        for (auto& spMarker : markerSet)
+        for (auto& spMarker : marker.second)
         {
             if (spMarker->markerType == RangeMarkerType::LineWidget)
             {
@@ -765,9 +765,9 @@ void ZepWindow::DrawAboveLineWidgets(SpanInfo& lineInfo)
     NVec2f linePx = GetSpanPixelRange(lineInfo);
     float currentY = 0.0f; // lineMargins.x;
 
-    for (auto& [index, markerSet] : markers)
+    for (auto& marker : markers)
     {
-        for (auto& spMarker : markerSet)
+        for (auto& spMarker : marker.second)
         {
             if (spMarker->spWidget == nullptr)
             {
